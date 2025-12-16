@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  sudo_privesc:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: Cell-Block
+    ports:
+      - "5022:22"
+    restart: unless-stopped
+

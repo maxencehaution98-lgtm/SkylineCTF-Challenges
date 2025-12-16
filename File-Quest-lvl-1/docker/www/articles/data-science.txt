@@ -1,0 +1,16 @@
+<h2>📊 Data Science et Big Data</h2>
+
+<p>La data science transforme les données brutes en insights précieux pour les entreprises. C'est un domaine en pleine expansion qui combine statistiques, programmation et expertise métier.</p>
+
+<h3>Compétences essentielles :</h3>
+<ul>
+    <li>Python / R</li>
+    <li>Machine Learning</li>
+    <li>Visualisation de données</li>
+    <li>SQL et bases de données</li>
+</ul>
+
+<p>À l'ESGI, nos étudiants travaillent sur des projets réels avec des entreprises partenaires pour développer leurs compétences.</p>
+
+<p><em>Article rédigé par le Lab Data Science</em></p>
+

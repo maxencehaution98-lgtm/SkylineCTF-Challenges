@@ -1,0 +1,109 @@
+/* Couleurs ESGI + mise en valeur du flag */
+:root {
+  --esgi-blue: #0066A2;
+  --esgi-dark: #333333;
+  --esgi-light: #f8f9fa;
+  --esgi-success: #28a745;
+  --esgi-gold: #FFD700; /* Pour mettre en valeur le flag */
+}
+
+body {
+  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  background-color: var(--esgi-light);
+  color: var(--esgi-dark);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-image: linear-gradient(135deg, rgba(0, 102, 162, 0.05) 0%, rgba(0, 102, 162, 0.02) 100%);
+}
+
+.flag-container {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  border-top: 4px solid var(--esgi-blue);
+}
+
+.flag-container h1 {
+  color: var(--esgi-blue);
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.flag-container .logo {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.5rem;
+  background-color: var(--esgi-blue);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 8px rgba(0, 102, 162, 0.2);
+}
+
+.flag-container .success-icon {
+  color: var(--esgi-success);
+  font-size: 3rem;
+  margin: 1rem 0;
+}
+
+.flag-container .flag-title {
+  color: var(--esgi-dark);
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.flag-container .flag {
+  background-color: var(--esgi-dark);
+  color: var(--esgi-gold);
+  padding: 1rem 1.5rem;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  margin: 1.5rem auto;
+  display: inline-block;
+  word-break: break-all;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.flag-container .admin-message {
+  color: #6c757d;
+  margin-top: 1.5rem;
+  font-style: italic;
+}
+
+.flag-container .footer {
+  margin-top: 2rem;
+  font-size: 0.8rem;
+  color: #6c757d;
+}
+
+.btn-back {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.5rem 1.5rem;
+  background-color: #6c757d;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+.btn-back:hover {
+  background-color: var(--esgi-dark);
+}
+

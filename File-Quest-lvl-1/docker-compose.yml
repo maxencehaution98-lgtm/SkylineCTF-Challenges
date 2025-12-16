@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  web:
+    build: ./docker
+    container_name: file-Quest
+    ports:
+      - "5082:80"
+    volumes:
+      - ./docker/www:/var/www/html
+    restart: unless-stopped
+

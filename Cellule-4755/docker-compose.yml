@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  ssh_privesc:
+    build: .
+    ports:
+      - "5022:22"
+    restart: unless-stopped
+    container_name: Cellile-4755
+
