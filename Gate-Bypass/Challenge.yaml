@@ -15,6 +15,6 @@ spec:
   instance: True
   connection_info: "Lancer votre instance sur http://deployer.ctfd.tail575cd.ts.net"
   max_attempts: 0
-  image: "nginx:latest"
+  image: "ghcr.io/sp00kyskelet0n/skylinectf-challenges/gate-bypass:latest"
   port: 80
   creator: "Enzo"
