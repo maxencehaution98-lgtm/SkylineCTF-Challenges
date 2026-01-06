@@ -1,5 +1,5 @@
 # SkylineCTF
-![](skylinectf.png)
+![](Others/skylinectf.png)
 
 ## Processus de création d'un challenge
 
@@ -11,7 +11,7 @@ Il est possible d'appliquer manuellement un challenge via kubectl mais la maniè
 
 Une fois poussés sur le dépôt et validés par un administrateur via la branche master Flux va synchroniser ces objets et les déployer automatiquement dans le cluster.
 
-![](challenge_creation_process.png)
+![](Others/challenge_creation_process.png)
 
 ## Processus de création d'instance 
 
@@ -19,6 +19,6 @@ SkylineCTF propose ses propres objets Kubernetes pour définir une instance uniq
 
 Ces objets Kubernetes seront déployés dans le cluster par la plateforme SkylineDeployer et seront déployés via un pod ou une VM windows en fonction du type de challenge par le SkylineOperator.
 
-![](instance_deployment_diagram.png)
+![](Others/instance_deployment_diagram.png)
 
 

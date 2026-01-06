@@ -1,25 +1,9 @@
 # Gate Bypass
 
-## SQL Injection
-En nous rendant sur l'URL donné par le chall nous pouvons voir une page assez simple, une page de login. Cette page est faillible aux Injection SQL, nous pourrons donc Bypass l'authentifiacation grâce à une injection simple.
+Catégorie  : Web
+Difficulté : Basique
 
-Voici un exemple :
-l'utilisateur qui nous intéresse dans ce cas de figure est ``admin``, nous pouvons commencer à rentrer cet utilisateur : 
-username : admin
-password : ??
+## Description :
 
-Maintenant vu que nous ne connaissons pas le mot de passe nous allons l'échapper grâce aux caractères suivants : ``' --``
-Ces caractères vont commenter le reste de la ligne, donc pas de vérification de mot de passe. 
+Le nouveau système de sécurité de SKL Corp utilise une porte d'accès protégée par un login/mot de passe. Cependant, un employé mécontent a laissé entendre que la base de données était mal configurée... Parviendras-tu à contourner l'authentification pour récupérer le flag caché dans le panneau d'administration ?
 
-Voici l'Injection SQL complète :
-````
-username : admin' --
-password : kakoukakou
-````
-
-le mot de passe n'est pas le bon mais on s'en fiche qu'il n'est pas vérifié. Nous sommes obligé de mettre un mot de passe car le champs ne doit pas être vide.
-
-Une fois authentifié, nous pouvons voir le flag : 
-```
-SKL{SQLi-1nJ3cT1oN}
-```
