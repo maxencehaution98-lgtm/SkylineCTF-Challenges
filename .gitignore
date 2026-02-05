@@ -1,2 +1,5 @@
 privatekey.gpg
 __pycache__
+**/src/
+*.zip
+!*.zip.gpg

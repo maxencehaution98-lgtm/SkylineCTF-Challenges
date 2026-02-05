@@ -6,6 +6,8 @@ on:
       - main
     paths:
       - "**/Dockerfile"
+      - "**/*.zip.gpg"
+      - "**/src/**"
 
 permissions:
   contents: read
@@ -27,6 +29,26 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Import GPG Key
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+
+      - name: Decrypt Source Code
+        run: |
+          # Find all .gpg files (excluding the key itself if present)
+          find . -name "*.zip.gpg" -print0 | while IFS= read -r -d '' file; do
+            echo "Decrypting $file..."
+            gpg --quiet --batch --yes --decrypt --output "${file%.gpg}" "$file"
+            
+            echo "Unzipping ${file%.gpg}..."
+            unzip -o -q "${file%.gpg}" -d "$(dirname "$file")"
+            
+            # Allow Docker build to see the files
+            ls -la "$(dirname "$file")"
+          done
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -34,7 +56,11 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@v44
         with:
-          files: "**/Dockerfile"
+          files: |
+            **/Dockerfile
+            **/*.zip.gpg
+            **/src/**
+          dir_names: true
           json: false
           separator: " "
 
@@ -47,10 +73,15 @@ jobs:
         run: |
           if [ -z "$CHANGED_FILES" ]; then exit 0; fi
 
-          for file in $CHANGED_FILES; do
-            [ -f "$file" ] || continue
+          for dir in $CHANGED_FILES; do
+            # CHANGED_FILES now contains directories because of dir_names: true
+            # Ensure Dockerfile exists in this directory
+            if [ ! -f "$dir/Dockerfile" ]; then
+                continue
+            fi
+            
+            echo "Build triggered for $dir"
 
-            dir=$(dirname "$file")
             folder_name=$(basename "$dir")
             safe_name=$(echo "$folder_name" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9._-]/-/g' | sed 's/-\+/-/g' | sed 's/^[-._]\+\|[-._]\+$//g')
 
@@ -58,7 +89,7 @@ jobs:
             docker buildx build \
               --platform linux/amd64 \
               --push \
-              -f "$file" \
+              -f "$dir/Dockerfile" \
               --tag "$IMAGE_NAME:latest" \
               --tag "$IMAGE_NAME:sha-${GITHUB_SHA}" \
               "$dir"

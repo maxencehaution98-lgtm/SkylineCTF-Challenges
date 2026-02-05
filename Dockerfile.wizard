@@ -1,0 +1,26 @@
+FROM python:3.11-slim
+
+# Install system dependencies
+# gnupg for encryption, curl/wget to download sops
+RUN apt-get update && apt-get install -y \
+    gnupg \
+    curl \
+    zip \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install SOPS
+ARG SOPS_VERSION=v3.8.1
+RUN curl -L -o /usr/local/bin/sops https://github.com/getsops/sops/releases/download/${SOPS_VERSION}/sops-${SOPS_VERSION}.linux.amd64 \
+    && chmod +x /usr/local/bin/sops
+
+# Install Python dependencies
+RUN pip install --no-cache-dir \
+    rich \
+    questionary \
+    python-gnupg
+
+WORKDIR /app
+
+# The script itself will be mounted or copied. 
+# We assume the user mounts the project root to /app
+ENTRYPOINT ["python", "manage_secrets.py"]

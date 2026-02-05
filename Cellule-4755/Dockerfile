@@ -4,11 +4,11 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 RUN useradd -m -s /bin/bash user && \
     echo "user:spongebob" | chpasswd
-COPY vulnerable_binary.c /tmp/
+COPY src/vulnerable_binary.c /tmp/
 RUN gcc /tmp/vulnerable_binary.c -o /usr/local/bin/vulnerable && \
     chmod 4755 /usr/local/bin/vulnerable
-COPY entrypoint.sh /entrypoint.sh
-COPY flag.txt /root/flag.txt
+COPY src/entrypoint.sh /entrypoint.sh
+COPY src/flag.txt /root/flag.txt
 RUN chmod +x /entrypoint.sh && \
     chmod 600 /root/flag.txt
 RUN mkdir -p /run/sshd && \

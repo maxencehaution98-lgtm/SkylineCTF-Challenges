@@ -1,0 +1,44 @@
+apiVersion: skyline.local/v1
+kind: CTFChallenge
+metadata:
+    name: file-quest-lvl-1
+    namespace: ctfd
+spec:
+    name: File Quest - Lvl 1
+    description: Trouvez le flag en exploitant une faille web basique.
+    category: Web
+    points: 100
+    image: ghcr.io/sp00kyskelet0n/skylinectf-challenges/file-quest-lvl-1:latest
+    port: 80
+    flag: ENC[AES256_GCM,data:NEG6FQyxsea7o4348DfpiJXnL7xD2op7YX4S0Q==,iv:zg9VwM/aQXGuU47i8r4eAEJYAJoLso/BCaBnb8cYRu0=,tag:jzWGARpddFJyvZ/AWdpF7g==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2026-02-05T11:15:42Z"
+    mac: ENC[AES256_GCM,data:iBELVuap4uo83Lrrrt0eWJJn3Ywo5iF89sQozGn9Z99cQFtSu11v5wBRDT54BhnKBV7d0NsplBrmDoTNJrUJY/viEQ6fO3jxdK0TcuRGkYGOaIIzzqCQdXmjWyvTADgV7iYJljKfiAwd2pHcVpoxHHVsvhlNEqo1r4XUhP3Unso=,iv:1zAA0LWE2+joeclEyh7bjumgAPqUyHBs4flpHRCmFZE=,tag:27sJXXjwbvhFpn+m0QtYEw==,type:str]
+    pgp:
+        - created_at: "2026-02-05T11:15:42Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            hQIMA9ybr2vGOZs6AQ/9HHSgVNvxcFtVnmpuKrfxgpmx3L7zMod581HoNBRP1mGg
+            oAxzCjstE37nPsiBa4hE6F/D1T7nYY7Wc51dKGW33l3XyQDaQuTZRJkVYq8bGA46
+            GOqkm4t3i/iz9eHO2BkypzXHRAh2YxdEkHMDcASQF9MAo7qNE95ZQrv6CVyA1r/u
+            rTlHb9ow5uWi8YAHpynGF7okO1/UN4L2XaxEvVMvLOFKy6HQElv6y5wdt5q5ZH5T
+            3keRMwNfqSfb8hMZiy2RBz3YptjMy8eGWyhqu1bITKvtn+VbQ77botojXnQRwWwd
+            FA7uKyapivrvim1X+6ev2yqKaTPgPqOxi2hWPJrSJ151+k5Q1/klisdjgwPCF3y0
+            mfWRWJw2qFZxVVesqw1wlKLrmE+Y3PiMWINP20NXxq8nC7A+bMSUU2huzj1IuM/S
+            9fP0IJJI5hpuC95/WraU+KSnsaUIjkLt98bNq2wRNWjgRol6q7WJyNa+VjXSJn27
+            tdAcyzcGC2jSSJIuHTJ2wN8U3WvHyfIHsn6yoBm38emtFX5NsfSm+1xDOKc7y6rZ
+            XXP/6vnGR94YfRsqfR49LDtkY3klC95NUGeJ6rMST/MSbGBMzR8OMMsonysNjnsC
+            GyjqfqQbWsT/MeV5XqyGaRmGeBOqgqZuYixDRZmQtS1euCcD1IA6UVyml4W8t5vS
+            XAGgYIb/TQl3Y2IJLe9cST/l2BnoP6/BZLy1/RDx+75/ostcj0A92AdIe/BmVNdC
+            hFhibhKR5L2EKLONm5sBHF3XBpi4GGbdzv3qFeiI6SwH72+jlucnwQPCGaO+
+            =bWQr
+            -----END PGP MESSAGE-----
+          fp: 96F466C4EF5AE501FC0C31649FBB4E548493AC41
+    encrypted_regex: ^(data|stringData|flag|password|secret)$
+    version: 3.8.1

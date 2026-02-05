@@ -1,20 +1,54 @@
----
-apiVersion: skyline.local/v1 # Ne jamais modifier ici
-kind: CTFChallenge # Ne jamais modifier ici
+# Ne jamais modifier ici
+apiVersion: skyline.local/v1
+# Ne jamais modifier ici
+kind: CTFChallenge
 metadata:
-  name: gate-bypass-enzo
-  namespace: ctfd # Ne jamais modifier ici
+    name: gate-bypass-enzo
+    # Ne jamais modifier ici
+    namespace: ctfd
 spec:
-  name: "Gate Bypass"
-  description: |
-    Le nouveau système de sécurité de SKL Corp utilise une porte d'accès protégée par un login/mot de passe. Cependant, un employé mécontent a laissé entendre que la base de données était mal configurée... Parviendras-tu à contourner l'authentification pour récupérer le flag caché dans le panneau d'administration ?
-  category: "Web"
-  points: 100
-  type: "standard"
-  state: "visible"
-  instance: True
-  connection_info: "Lancer votre instance sur http://deployer.ctfd.tail575cd.ts.net"
-  max_attempts: 0
-  image: "ghcr.io/sp00kyskelet0n/skylinectf-challenges/gate-bypass:latest"
-  port: 80
-  creator: "Enzo"
+    name: Gate Bypass
+    description: |
+        Le nouveau système de sécurité de SKL Corp utilise une porte d'accès protégée par un login/mot de passe. Cependant, un employé mécontent a laissé entendre que la base de données était mal configurée... Parviendras-tu à contourner l'authentification pour récupérer le flag caché dans le panneau d'administration ?
+    category: Web
+    points: 100
+    type: standard
+    state: visible
+    instance: true
+    connection_info: Lancer votre instance sur http://deployer.ctfd.tail575cd.ts.net
+    max_attempts: 0
+    image: ghcr.io/sp00kyskelet0n/skylinectf-challenges/gate-bypass:latest
+    port: 80
+    creator: Enzo
+    flag: ENC[AES256_GCM,data:kDFjTokfo6AKoYyYH9x87J/QAA==,iv:r+JqwFzFWUZBh3YABG+/gzpgN2AVIko1IBZn62Mk7tc=,tag:cdaT4twpOFFbabpxONJydA==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2026-02-05T11:15:55Z"
+    mac: ENC[AES256_GCM,data:GTz76LUMlEq7LXQEA+3qvLGLMcCsJTauiOQm/R06GFwF9DtxpDnbsfFtAlsL7PIuou+OAAnq6wJaO5BAitimpVv6vC8w9kAdWk7FWQOB4+JWfTeMVnia8f32yjntkYUtMdq0OiqUnD1clHcQQGz3mI64Wj3QviodCa82jg8F+0g=,iv:RIM9oTQjXNf6kCsuGcWn4H1tA4gYEprr3Qc+6SykU6I=,tag:hed0CAB+czjSWg9JNF1Bbg==,type:str]
+    pgp:
+        - created_at: "2026-02-05T11:15:55Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            hQIMA9ybr2vGOZs6AQ//X7zjo+vWU0DpoBrSWELHZtUkiSk+R1MwlIKjH/oWSwl2
+            sMSV63BDjjKceeLS7mR2AVFlPofUD766rPDy68DMbK57BTKwtaxPsqFK1Wir9vC7
+            OshMTlMXHyWlsvNJlBgie/V4YcDYoKky9ERKmK1Qa0TwEvHHn8P5VWNvZuD/zufQ
+            Uiy/psWSiZqGrgxFu0F2KHC3N04Fz4Fe+Xr6/ljx+tlTiAE8RGkxyMhQuEFPR5ap
+            r4wKVVROVlLYHnkkkXvkYACxBFUm9i9PoO7gwZCIZwMVrmzfJBXQqDeeqvMA3XVo
+            XIN6qhKx23M3JlDLOEqEFEHQqdPnFTEmNQHHjCy4P3tm753h/GHvF+LcZPHNHtX3
+            rTjWEu7IFM23HGHqvHFkqlZeHT6F6BIfN7IKNZxkM3g/aJv8m9xJjOhzO/EHmdHH
+            EbKpAfinV+Tf4v5CobJFOm5iVVmWl6If9p9BxK4hShbgrZK8znt8nzxZgd8OZwUT
+            dQFvDwsKL99NBgvSMjnsSPip5qq3Esk3r95wu3WdU3QKRb6XimVR8evx/LhruQqd
+            CuamKydcIjFkuZnxLX1N54ioxcLhGG+T5myhnz6uJJpRebX9edjEBlZ0G11mTZpc
+            iHuYzjJABlfQTv7LyflHwu4Q1gmErsKKhZgC4MhAYM4AJhBot7o5TC27XbjtV4DS
+            XgE5nr37BpVU6PWjcbvXLKDCsjOSD82x/umqGKE8CHF6AHe9Z5B3G13sFrLnlp+b
+            nm0jSEKOyN0CDDrX17BIND2R/oUWZeH1GdBcIW3ZP1bHqHkK+ekuNs9KuDabqxA=
+            =6tz5
+            -----END PGP MESSAGE-----
+          fp: 96F466C4EF5AE501FC0C31649FBB4E548493AC41
+    encrypted_regex: ^(data|stringData|flag|password|secret)$
+    version: 3.8.1

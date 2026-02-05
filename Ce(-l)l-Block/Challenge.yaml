@@ -1,0 +1,44 @@
+apiVersion: skyline.local/v1
+kind: CTFChallenge
+metadata:
+    name: cell-block
+    namespace: ctfd
+spec:
+    name: Ce(-l)l Block
+    description: Connectez-vous en SSH et échappez-vous de la prison.
+    category: System
+    points: 100
+    image: ghcr.io/sp00kyskelet0n/skylinectf-challenges/ce-l-l-block:latest
+    port: 22
+    flag: ENC[AES256_GCM,data:HqGW2/wJr3AiKEZ3FA8wSxoNX3Lh/lg2CtQIPj+TcLo5ssQb2of9bA==,iv:jaDNuMvxLY30hWyVWznbgCo5GTia9p0YTJOhpBRRJdc=,tag:343tqKWH7S4KsLE7iE09Ug==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2026-02-05T11:15:35Z"
+    mac: ENC[AES256_GCM,data:zV0T04zufeQJnFPUknaF7F3PzAIUGb/cuinE8Kfpi5VwBuwoM9EZ3evw5WEaX0HNzdBDg9UBmcYa3iCrad5U0yzsis6pUUpTPgZQ8N3lmMOGLSGYVt+TbbRZSFPZ+gs3mRGE/FTDTvDtCrhsZJiMV8kXeGpILy8ee1UvG4KnU9U=,iv:ODNJSdyIGyoPDxAq1MWNz2sOufs/6MakKdiTBEydKhY=,tag:q1IMvl6xVUCH2VHDw0IvTw==,type:str]
+    pgp:
+        - created_at: "2026-02-05T11:15:35Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            hQIMA9ybr2vGOZs6AQ//YMMQVvLHkFzbwSGGBwHSHUj6HCZxyJOavhzqKrrXJK4v
+            ZpVs6sYa0YQjRYDc+ARJ5ol6wM0v3Q/KArKvehm+CGlLtNPCnNq2fTu2yG6PTIHD
+            pkU3uM52Nhr6rNXFe3Oy9DtW0L5mkF7UIX6GQaXf5zOu7LaHH5cfOC80jGco1Djf
+            2bf72dYS2rPNY64rhqbp602XJ5SZLW/qwJjpuHChTfcX+wxaIxxBuGZdG+mnckUt
+            t+n1PkxvSX3KF26Dz8AuZsyQcgICv1kBEdweisGXpElgXpkcUwff2dX+3EuRenK6
+            o4MkvldF7v3K7dqHs8PptwoeIYjxNMI1quQ/99BwYC7RwjuFcDOy+NVFcnJv+/EX
+            sgt2nlnDCKasJvLx3sIsZc/V6ZPXwtsuNrdrZotCZDNw1i0K6wT6SmidaBm8/u/k
+            UuA1oS66a584DkCEoHDDuxo1+2g7JjyZtJJ3dLk/eHvD2ZJIReWAtI7DPG5HrKWB
+            t1yjQtSdJbyTVV06lJhSRzpvT4Eymh7/ywr1/QWJAMhRMZK3XWSu+SijJG3PU8bX
+            Hnt+HnHHr8MJ6ehffkhqnAkg4cyNIR1uEQKoePFgvFYacplUKMu3K3KQGPi06raF
+            4OpUgYLGV6xY2iEua8Rkp8SE07YI5Xfvt+m8o9IsXCHso6MioOP0KyXgLTwWqyjS
+            XgGFzFs3EEk4JwSFMF5UGfySNMPjYabYGED6cWyf4Q8otSmkTm0QVql08V6gcGKC
+            BOzkI06SYgRaHIKVHpvo85R4wBzXEzYc+YQX8dLOSg78BbCcCwy/RsVdh2qKLPA=
+            =OkMd
+            -----END PGP MESSAGE-----
+          fp: 96F466C4EF5AE501FC0C31649FBB4E548493AC41
+    encrypted_regex: ^(data|stringData|flag|password|secret)$
+    version: 3.8.1
