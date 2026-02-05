@@ -114,8 +114,9 @@ def encrypt_source(folder_path):
     base_name = os.path.basename(folder_path)
     parent_dir = os.path.dirname(folder_path)
     
-    # 1. Create Zip
-    zip_path = shutil.make_archive(base_name, 'zip', folder_path)
+    # 1. Create Zip (Preserving 'src' folder structure)
+    # This ensures that unzipping creates a 'src/' folder, matching Dockerfile COPY src/...
+    zip_path = shutil.make_archive(base_name, 'zip', root_dir=parent_dir, base_dir=base_name)
     # shutil.make_archive creates in current dir, let's move it next to source if needed
     # But usually creating "src.zip" next to "src/" is fine.
     
