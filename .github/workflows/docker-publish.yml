@@ -30,9 +30,8 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Import GPG Key
-        uses: crazy-max/ghaction-import-gpg@v6
-        with:
-          gpg_private_key: ${{ secrets.SKYLINE_PRIV_KEY_B64 }}
+        run: |
+          echo "${{ secrets.SKYLINE_PRIV_KEY_B64 }}" | base64 -d | gpg --import --batch --yes
 
       - name: Decrypt Source Code
         run: |
