@@ -11,6 +11,7 @@ COPY src/entrypoint.sh /entrypoint.sh
 COPY src/flag.txt /root/flag.txt
 RUN chmod +x /entrypoint.sh && \
     chmod 600 /root/flag.txt
+
 RUN mkdir -p /run/sshd && \
     sed -i 's|#PermitRootLogin prohibit-password|PermitRootLogin no|' /etc/ssh/sshd_config && \
     sed -i 's|#PasswordAuthentication yes|PasswordAuthentication yes|' /etc/ssh/sshd_config
