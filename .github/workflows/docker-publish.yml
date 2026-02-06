@@ -8,6 +8,7 @@ on:
       - "**/Dockerfile"
       - "**/*.zip.gpg"
       - "**/src/**"
+      - "**/Challenge.yaml"
 
 permissions:
   contents: read
