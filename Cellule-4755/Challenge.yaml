@@ -1,40 +1,42 @@
 apiVersion: skyline.local/v1
 kind: CTFChallenge
 metadata:
-    name: cellule-4755
-    namespace: ctfd
+  name: cellule-4755
+  namespace: ctfd
 spec:
-    name: Cellule 4755
-    description: Brute forcez le SSH et exploitez le binaire SUID.
-    category: System
-    points: 100
-    image: ghcr.io/sp00kyskelet0n/skylinectf-challenges/cellule-4755:latest
-    port: 22
-    flag: ENC[AES256_GCM,data:DiPoYEzdt5vukgetPQANU3d9,iv:tm9Fr8jkcxbWQKcv2RunilsW/N4Pl7k9Dcp8XMHTmDM=,tag:ZaQPt8CnTTEtnmcdqZxINw==,type:str]
+  name: Cellule 4755
+  description: |
+    Un binaire système possède des permissions étranges (SUID).
+    Analysez le système pour trouver ce binaire et l'exploiter afin d'obtenir les privilèges nécessaires pour lire le flag.
+  category: System
+  points: 100
+  image: ghcr.io/sp00kyskelet0n/skylinectf-challenges/cellule-4755:latest
+  port: 22
+  flag: ENC[AES256_GCM,data:DiPoYEzdt5vukgetPQANU3d9,iv:tm9Fr8jkcxbWQKcv2RunilsW/N4Pl7k9Dcp8XMHTmDM=,tag:ZaQPt8CnTTEtnmcdqZxINw==,type:str]
 sops:
-    lastmodified: "2026-02-06T11:15:28Z"
-    mac: ENC[AES256_GCM,data:SLKnbhWPtIeHljC9D6mP7rlw1/rMFQeptak7wufAavtkIQ1iSI8GNr65ziK7F5imZ99V+OfDGs+yctzHO/LVlsuVWVC5P1tf4vBW2cIAKFRSUyXrQqJj2kk+xwrzp/4eLq6Qp59nz3GAL5mrL7p7pEYfUKNLKaZdDEDv/0nMrhk=,iv:xJPFQIfIocU1w+8L7Cz/1VbtOV4PoH+zgeuLOvRpiw0=,tag:Zp3JpZxPbJocrNA4T+Rx1w==,type:str]
-    pgp:
-        - created_at: "2026-02-06T08:58:07Z"
-          enc: |-
-            -----BEGIN PGP MESSAGE-----
+  lastmodified: "2026-02-06T11:15:28Z"
+  mac: ENC[AES256_GCM,data:SLKnbhWPtIeHljC9D6mP7rlw1/rMFQeptak7wufAavtkIQ1iSI8GNr65ziK7F5imZ99V+OfDGs+yctzHO/LVlsuVWVC5P1tf4vBW2cIAKFRSUyXrQqJj2kk+xwrzp/4eLq6Qp59nz3GAL5mrL7p7pEYfUKNLKaZdDEDv/0nMrhk=,iv:xJPFQIfIocU1w+8L7Cz/1VbtOV4PoH+zgeuLOvRpiw0=,tag:Zp3JpZxPbJocrNA4T+Rx1w==,type:str]
+  pgp:
+    - created_at: "2026-02-06T08:58:07Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
 
-            hQIMA4Wg+3KzyZPEAQ//UeUIdQjv+zViTUWTmnYV78xWfifetHhm9nj9V/VxefbO
-            F2DSKGa7y40BJ1jYZwlwwwTAGsm9KFIuA5Y4lc4ObnHgQaVIrvQZbRdxg9EnT8oV
-            Nhxu7FNhmSYmuMdxvccjz2dJiHazPifE9j/SsGiCsXnuSs3H3/TeHDyssxwFibNw
-            VFC872HXWFCd3T8hoBFil6RcjgzzewcEwY8X9QVBktiHxE9T9B17mux+xfDvx2Mz
-            zIjy+OcHD/3e+VZJlMWWKlvpPsP7mTexY13joNdnKk6ObkxZ5SV9WlRdjvkoVkWY
-            GojFdv7xYxVVRJcWSZAYtt2CidPsyXu+Xhy+ejsozUiK1tV4XSVGvfM9+A8JbqPk
-            jBn4mOnJqXVh8YWifNUNjMFlxIIvcSsjJ1ANU3uYDc4cPosrmFhRAANwVrc57wlV
-            awVkOSqDi/+6dKrF7ZmUUGPmN02TmL/Ho5dVJhylz3koy3xjdFsJ6tDVnZQwumR2
-            e05uk0Yvb8GKi60V9wZLzX8AM6icRhe3gTeveouXHaL/Dvu/VKhPiZUqIL7gkHcH
-            NFODGbUnS0P3jsc5UiE2RDh0q7QCdm0UkFAe6+XeS6vTFMu/mmQOB9ZekrcwVN2M
-            dTJ2z3pbBsO4oTWHURz7g6HhHyHmIC9G9aJTZEZBOm8L444voMPD2F+YonO41C3U
-            aAEJAhCDK0xX3hZEXlgUq9CDJxrF6LyuFyg93zQM0Z/nbsHKo6qgIy09ewiPfLbF
-            Pzp/uDZH+RzMrGhLixYklgCI69Cs2HUKeV9TUAUlPNTomXNys5bRzQ6N6sjvQk8S
-            FL5O+IgmAV0J
-            =vfs3
-            -----END PGP MESSAGE-----
-          fp: 2F678007F08254265530095FB5B68F8BCE0CB069
-    encrypted_regex: ^(data|stringData|flag|password|secret)$
-    version: 3.11.0
+        hQIMA4Wg+3KzyZPEAQ//UeUIdQjv+zViTUWTmnYV78xWfifetHhm9nj9V/VxefbO
+        F2DSKGa7y40BJ1jYZwlwwwTAGsm9KFIuA5Y4lc4ObnHgQaVIrvQZbRdxg9EnT8oV
+        Nhxu7FNhmSYmuMdxvccjz2dJiHazPifE9j/SsGiCsXnuSs3H3/TeHDyssxwFibNw
+        VFC872HXWFCd3T8hoBFil6RcjgzzewcEwY8X9QVBktiHxE9T9B17mux+xfDvx2Mz
+        zIjy+OcHD/3e+VZJlMWWKlvpPsP7mTexY13joNdnKk6ObkxZ5SV9WlRdjvkoVkWY
+        GojFdv7xYxVVRJcWSZAYtt2CidPsyXu+Xhy+ejsozUiK1tV4XSVGvfM9+A8JbqPk
+        jBn4mOnJqXVh8YWifNUNjMFlxIIvcSsjJ1ANU3uYDc4cPosrmFhRAANwVrc57wlV
+        awVkOSqDi/+6dKrF7ZmUUGPmN02TmL/Ho5dVJhylz3koy3xjdFsJ6tDVnZQwumR2
+        e05uk0Yvb8GKi60V9wZLzX8AM6icRhe3gTeveouXHaL/Dvu/VKhPiZUqIL7gkHcH
+        NFODGbUnS0P3jsc5UiE2RDh0q7QCdm0UkFAe6+XeS6vTFMu/mmQOB9ZekrcwVN2M
+        dTJ2z3pbBsO4oTWHURz7g6HhHyHmIC9G9aJTZEZBOm8L444voMPD2F+YonO41C3U
+        aAEJAhCDK0xX3hZEXlgUq9CDJxrF6LyuFyg93zQM0Z/nbsHKo6qgIy09ewiPfLbF
+        Pzp/uDZH+RzMrGhLixYklgCI69Cs2HUKeV9TUAUlPNTomXNys5bRzQ6N6sjvQk8S
+        FL5O+IgmAV0J
+        =vfs3
+        -----END PGP MESSAGE-----
+      fp: 2F678007F08254265530095FB5B68F8BCE0CB069
+  encrypted_regex: ^(data|stringData|flag|password|secret)$
+  version: 3.11.0

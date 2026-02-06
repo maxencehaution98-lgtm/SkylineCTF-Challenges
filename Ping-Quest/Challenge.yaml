@@ -1,40 +1,45 @@
 apiVersion: skyline.local/v1
 kind: CTFChallenge
 metadata:
-    name: ping-quest
-    namespace: ctfd
+  name: ping-quest
+  namespace: ctfd
 spec:
-    name: Ping Quest
-    description: Un outil de ping mal protégé... Pouvez-vous exécuter des commandes ?
-    category: Web
-    points: 100
-    image: ghcr.io/sp00kyskelet0n/skylinectf-challenges/ping-quest:latest
-    port: 5000
-    flag: ENC[AES256_GCM,data:CtXrlArU5wl8ggimOcvhdRZM,iv:5x/36ntuHh9tVUpLtaJAgDG8QMyVHA43iP6bGl96HPE=,tag:eDyH8JtpO9cLjTcoP6bJsA==,type:str]
+  name: Ping Quest
+  description: |
+    Cette interface d'administration réseau permet de pinger des machines.
+    Mais est-ce vraiment tout ce qu'elle fait ?
+    Injectez vos propres commandes pour prendre le contrôle du serveur.
+  category: Web
+  points: 100
+  instance: true
+  connection_info: Lancer votre instance sur http://deployer.ctfd.tail575cd.ts.net
+  image: ghcr.io/sp00kyskelet0n/skylinectf-challenges/ping-quest:latest
+  port: 5000
+  flag: ENC[AES256_GCM,data:CtXrlArU5wl8ggimOcvhdRZM,iv:5x/36ntuHh9tVUpLtaJAgDG8QMyVHA43iP6bGl96HPE=,tag:eDyH8JtpO9cLjTcoP6bJsA==,type:str]
 sops:
-    lastmodified: "2026-02-06T11:15:28Z"
-    mac: ENC[AES256_GCM,data:Sy033qCnzUfkdB4jAi6etX/qPTdYLYGHCw91f6sd9Rsz+UbRGWGOaDv+cAr6nglMq1+FQJi76yh7IulJnvtkOAQetmssLuOO+Q0G5ECOuw22y9sK5/oj6qGyewJwoIvdkhiKIdIfQzFqsjXJcU+sYx3jos2qQ6PSDGsU23dKN1Y=,iv:2sQD77CI/iuL7I+G//b0hQ2cqK+o/dp12izssBUCKE8=,tag:plmPUWp8sjyqE2LEbJrZpg==,type:str]
-    pgp:
-        - created_at: "2026-02-06T08:58:07Z"
-          enc: |-
-            -----BEGIN PGP MESSAGE-----
+  lastmodified: "2026-02-06T11:15:28Z"
+  mac: ENC[AES256_GCM,data:Sy033qCnzUfkdB4jAi6etX/qPTdYLYGHCw91f6sd9Rsz+UbRGWGOaDv+cAr6nglMq1+FQJi76yh7IulJnvtkOAQetmssLuOO+Q0G5ECOuw22y9sK5/oj6qGyewJwoIvdkhiKIdIfQzFqsjXJcU+sYx3jos2qQ6PSDGsU23dKN1Y=,iv:2sQD77CI/iuL7I+G//b0hQ2cqK+o/dp12izssBUCKE8=,tag:plmPUWp8sjyqE2LEbJrZpg==,type:str]
+  pgp:
+    - created_at: "2026-02-06T08:58:07Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
 
-            hQIMA4Wg+3KzyZPEARAAqFnVRtwTiHP1Beg/ny6G/ppfa34/kn1BcDNZaoWvJl1n
-            2bBaIOyxTr4XCx0djWNSuGZ8Phxv5qXr3vxfECdR03lhojVwMh6PxyiTdt+Wk5dy
-            hrDHrTEMuxLyk3BBUZIAZ495J0tGsRsAdLlvU6hPF+96TMEpuvORpPwaaLDOPX57
-            kdxZDXpZixAXov0C7FB8dEK6xmVQcKIwNV7FNbGYGGbuGxFXvgB1Eo0IdfemTtLa
-            3D5k1EUrBQ8+ZC8bUShsVXMLPKLXZ2ITShkX/wUkzvJoAiAzsIksMq8HdIao+/Bp
-            0lk9xzhpJk/doh1SXCITyoRLT0gIMXVEBLySSayvXy/t7VsgztBI5fQ12XBTaMb1
-            0fNmEo7h4sI7InkDKqVvPWMfzWboD2w8d6GeqCJGX7rUiqvw12Fe99BG0bEWqF/p
-            5MCRAnzAfxatWuVrnt9RiMZEoCwk6wgyupE37c8uuOJc7xB4DIV5O2fO65+FTJYU
-            45yKH4lQyddPANKuGnVMuzjFrRIB56M5UyF2kHoIR72pp7bUE94g0hxjVIE9Z7Sa
-            BTrcWNA1V9AIMIGACwKY/yzZVcAF7VWlSZCnrMPW901OIhcRP2vsYHzYNvRKUH+v
-            inViu6Ci7frNHKsjObmC1nj8JaY5ZXKjOjGRnmfKviCJVEbNKXspRzOQO+H6FITU
-            ZgEJAhDu6yIypL5XRwpYtBlbA60uqVJhL6f0Gti9ervNV4VJAkTzVFj0rpd9WPW2
-            bwdrdO0oYikpyZVcgzJWIOLtyXRmGvH5HN10S/jF6VZ9W+fzmwHdKaOWEjwuowP4
-            6Pim2YvB1Q==
-            =1X3E
-            -----END PGP MESSAGE-----
-          fp: 2F678007F08254265530095FB5B68F8BCE0CB069
-    encrypted_regex: ^(data|stringData|flag|password|secret)$
-    version: 3.11.0
+        hQIMA4Wg+3KzyZPEARAAqFnVRtwTiHP1Beg/ny6G/ppfa34/kn1BcDNZaoWvJl1n
+        2bBaIOyxTr4XCx0djWNSuGZ8Phxv5qXr3vxfECdR03lhojVwMh6PxyiTdt+Wk5dy
+        hrDHrTEMuxLyk3BBUZIAZ495J0tGsRsAdLlvU6hPF+96TMEpuvORpPwaaLDOPX57
+        kdxZDXpZixAXov0C7FB8dEK6xmVQcKIwNV7FNbGYGGbuGxFXvgB1Eo0IdfemTtLa
+        3D5k1EUrBQ8+ZC8bUShsVXMLPKLXZ2ITShkX/wUkzvJoAiAzsIksMq8HdIao+/Bp
+        0lk9xzhpJk/doh1SXCITyoRLT0gIMXVEBLySSayvXy/t7VsgztBI5fQ12XBTaMb1
+        0fNmEo7h4sI7InkDKqVvPWMfzWboD2w8d6GeqCJGX7rUiqvw12Fe99BG0bEWqF/p
+        5MCRAnzAfxatWuVrnt9RiMZEoCwk6wgyupE37c8uuOJc7xB4DIV5O2fO65+FTJYU
+        45yKH4lQyddPANKuGnVMuzjFrRIB56M5UyF2kHoIR72pp7bUE94g0hxjVIE9Z7Sa
+        BTrcWNA1V9AIMIGACwKY/yzZVcAF7VWlSZCnrMPW901OIhcRP2vsYHzYNvRKUH+v
+        inViu6Ci7frNHKsjObmC1nj8JaY5ZXKjOjGRnmfKviCJVEbNKXspRzOQO+H6FITU
+        ZgEJAhDu6yIypL5XRwpYtBlbA60uqVJhL6f0Gti9ervNV4VJAkTzVFj0rpd9WPW2
+        bwdrdO0oYikpyZVcgzJWIOLtyXRmGvH5HN10S/jF6VZ9W+fzmwHdKaOWEjwuowP4
+        6Pim2YvB1Q==
+        =1X3E
+        -----END PGP MESSAGE-----
+      fp: 2F678007F08254265530095FB5B68F8BCE0CB069
+  encrypted_regex: ^(data|stringData|flag|password|secret)$
+  version: 3.11.0

@@ -9,7 +9,9 @@ metadata:
 spec:
     name: File Quest lvl 2
     description: |
-        TBD.
+        Le développeur a corrigé la faille précédente en ajoutant des filtres.
+        Cependant, il semble avoir oublié certains cas limites...
+        Contournez la protection pour lire à nouveau le flag.
     category: Web
     points: 100
     type: standard
@@ -27,24 +29,24 @@ sops:
     pgp:
         - created_at: "2026-02-06T11:15:41Z"
           enc: |-
-            -----BEGIN PGP MESSAGE-----
+              -----BEGIN PGP MESSAGE-----
 
-            hQIMA4Wg+3KzyZPEAQ//SdvwVHkAdoLRiZmnToSmtmqA3cDJ4yJwtLFZF1NiYEPE
-            bvjoqvzc88pcuTj7UHAbT/thdT6IRjX4t6W4m5W0GbKrsvl6Hpeid3O/aWAmys4K
-            PX1qOmf+zvgwZb3/DGrbeyXTJnmZp85OgUFreeUGMKocLQ05XISrAkF7/LiiXN8I
-            58+gmTBPZrdWygo8gmkU67BifV5bm3yQk9xmS//m6bpEdEpah9gMFXXcvIILZT08
-            tpJ/OS4O3SLKZ7kcItvyLBpHwgD0Vun3u84l6HGtl+Eg2qNOf919/rflZPdbaOke
-            3E3uIEX9xTbz0r5hqPPK+/C5N/xrhXa/1pfEfWSmqIpRyMRpvCyEhDMM8xbz/hfh
-            c7FAQA/wZPj+M7E4V8pE/Ma5O1nIHDBE4EE2NZBEFcRZZ29VMhcI+QqFBYqF92eQ
-            Wghgfy5YfbICSTz9emMRRMxurdrnEsDeH2gaJmBw7mGLtfqdkWyqZwRPoeirMIU7
-            OgKUG2nlCVBWQZKeyXidZYSVuDsW7h8wB9JoOj6Sce4mvpQqs7F+P6f/0+s1yopc
-            PyNhQ5XIOTeePF5OhOnxTEHI7WaXNL/pajiSb6TTATKY65S9mYRBLN1YQYiBIQId
-            yiEQRpciIMerWNjUaH1mM1R3ItbGetfYz3y1qgBrxV1oSWpSz4YayyQ0yDm2AhDU
-            aAEJAhCxeeemAouOiUe3YRySLX4V9kD3Z38IzpLU6Wp2Rv0GW7nB7eNyYqCkxF0i
-            IW7/ovGhR3I2chyuJSJehOlaKVInxHUtsDuNfa6V4SVi6FpldQbEz9GlbDR/IpVz
-            /T+PH+tir+Ca
-            =ah2j
-            -----END PGP MESSAGE-----
+              hQIMA4Wg+3KzyZPEAQ//SdvwVHkAdoLRiZmnToSmtmqA3cDJ4yJwtLFZF1NiYEPE
+              bvjoqvzc88pcuTj7UHAbT/thdT6IRjX4t6W4m5W0GbKrsvl6Hpeid3O/aWAmys4K
+              PX1qOmf+zvgwZb3/DGrbeyXTJnmZp85OgUFreeUGMKocLQ05XISrAkF7/LiiXN8I
+              58+gmTBPZrdWygo8gmkU67BifV5bm3yQk9xmS//m6bpEdEpah9gMFXXcvIILZT08
+              tpJ/OS4O3SLKZ7kcItvyLBpHwgD0Vun3u84l6HGtl+Eg2qNOf919/rflZPdbaOke
+              3E3uIEX9xTbz0r5hqPPK+/C5N/xrhXa/1pfEfWSmqIpRyMRpvCyEhDMM8xbz/hfh
+              c7FAQA/wZPj+M7E4V8pE/Ma5O1nIHDBE4EE2NZBEFcRZZ29VMhcI+QqFBYqF92eQ
+              Wghgfy5YfbICSTz9emMRRMxurdrnEsDeH2gaJmBw7mGLtfqdkWyqZwRPoeirMIU7
+              OgKUG2nlCVBWQZKeyXidZYSVuDsW7h8wB9JoOj6Sce4mvpQqs7F+P6f/0+s1yopc
+              PyNhQ5XIOTeePF5OhOnxTEHI7WaXNL/pajiSb6TTATKY65S9mYRBLN1YQYiBIQId
+              yiEQRpciIMerWNjUaH1mM1R3ItbGetfYz3y1qgBrxV1oSWpSz4YayyQ0yDm2AhDU
+              aAEJAhCxeeemAouOiUe3YRySLX4V9kD3Z38IzpLU6Wp2Rv0GW7nB7eNyYqCkxF0i
+              IW7/ovGhR3I2chyuJSJehOlaKVInxHUtsDuNfa6V4SVi6FpldQbEz9GlbDR/IpVz
+              /T+PH+tir+Ca
+              =ah2j
+              -----END PGP MESSAGE-----
           fp: 2F678007F08254265530095FB5B68F8BCE0CB069
     encrypted_regex: ^(data|stringData|flag|password|secret)$
     mac_only_encrypted: true

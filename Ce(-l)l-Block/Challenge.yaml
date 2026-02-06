@@ -5,7 +5,11 @@ metadata:
   namespace: ctfd
 spec:
   name: Ce(-l)l Block
-  description: Connectez-vous en SSH et échappez-vous de la prison.
+  description: |
+    Vous êtes enfermé dans un environnement restreint (rbash).
+    Votre objectif est de vous évader de cette prison (jail escape) pour lire le flag.
+
+    Identifiants SSH fournis au lancement de l'instance.
   category: System
   points: 100
   instance: true
