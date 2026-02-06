@@ -2,6 +2,8 @@ creation_rules:
   - path_regex: .*.yaml
     encrypted_regex: "^(data|stringData|flag|password|secret)$"
     pgp: "2F678007F08254265530095FB5B68F8BCE0CB069"
+    mac_only_encrypted: true
   - path_regex: .*.json
     encrypted_regex: "^(data|stringData|flag|password|secret)$"
     pgp: "2F678007F08254265530095FB5B68F8BCE0CB069"
+    mac_only_encrypted: true

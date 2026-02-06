@@ -20,31 +20,32 @@ spec:
     port: 80
     instance: true
     creator: Enzo
-    flag: ENC[AES256_GCM,data:k46YIloeL7lTudbKDjE/TgHb,iv:VLU3Tv97K7UrHP4Mhl3IAgNXGe5HObjtMpIzJ8DEs20=,tag:bBs3hTDmPmNL6JK3qe2U+A==,type:str]
+    flag: ENC[AES256_GCM,data:U6yiDqZX6aBLvWQS7d98VZfso6JVQ74THJzkjkPbIvPKfIR04i1oe528SoCx87sNtXYnX3fWHzrVdYt+a8o7FBA2vWpmXldWAGdC5xamjmYTbCpz7w/cON7y/fDKtS9J0b2dtZlyqN/PaCp0PdChSTAmEEw+J2WdXcrREHxaXDjXAzI=,iv:l0quNQckd6w3LXFROhG6664v/BsN49QvZE8PgkILftk=,tag:gH1WJAaCX8Sp48+s6EQ/FA==,type:str]
 sops:
-    lastmodified: "2026-02-06T08:58:07Z"
-    mac: ENC[AES256_GCM,data:3orFTuQeV3pjkkm/kQX9CKywSHTtqqQyy0NMEk705GxIsaFTtrmJCYzw2BSMB/qxJts5IG6DQQAWxLPU2+7vrfFCyk/uVwm4xxLiiZEuzx1qxiteV/QcJzQYE4vKb89ZYlNF/E4Smw/a2Vt29aoZVZMBhov/z0PZ8COSFvdqTYA=,iv:jmIYlFqj/PSZA5ZQ7onxfXtUsjR3kRlCoMcsI0jRmRI=,tag:u+g5QPIl5X6jT0WQhZjSFA==,type:str]
+    lastmodified: "2026-02-06T11:15:41Z"
+    mac: ENC[AES256_GCM,data:sA09EhO7wdt72v0Th4WUVosySSfS9/D0GZ4Md4hsrI/MNbPTD61TT+ICl1GhzGzfANiJV+EX8OMqGgvbWF3nWWdp9SRfGIVXzDS/jKIL/6bd6IlE28U9AbrVj0e1gsaaXVtBV8Jbsp/WcFBXk0OiHie4cRUixnd/R8OeVxUHQkg=,iv:Z+ArsSqOLNdPYKsDIlcTRHfGstgbihxsfI4zsTBjgnQ=,tag:IpI9gkKI41OUjdj7KM8i4g==,type:str]
     pgp:
-        - created_at: "2026-02-06T08:58:07Z"
+        - created_at: "2026-02-06T11:15:41Z"
           enc: |-
-              -----BEGIN PGP MESSAGE-----
+            -----BEGIN PGP MESSAGE-----
 
-              hQIMA4Wg+3KzyZPEARAA0AxZTT4LRMykbm5XIt4kWFZdczdDiSMJJFHnUEw0C7mG
-              xkJsRKVD0U+q5HFdJpjo9e9mjMau56A6beWz058y+/44YSRnjUgmMrZSFQTsDEPb
-              RZF7QpgXdI2TexMYiiOhD0u0QC9oS8FxfrOl18DCDyA2GXmMpKf8PLd2noIox1/R
-              hPKc77WL6aNqDsd7AKApeAG540Qr/KujQCs+BHFiPzuon9smZoh3XaMX2owVIwkl
-              z2SvtO77/PtakniYEObtzd8I5LTMhdscT1t3fC3CkIxmzymyZtmBbNTqvkFHTLCT
-              IuyLRyLOn9gIMq7DugbW+zNel6cf6xQECuGZBZE4I/6xTc+QQpiiuo8031cKYEmi
-              1oNB1GvJvbiT0dCqwJKSpusEvMOuye4SkUgQK5ZOVCKtzVkUHK7TuKFmx3urQGoL
-              rXY3IBsybiOQwKVGrJS1ic6aPyG4ftqQ9HGtXhsIs1/ropyPgobnkdY5Er2UvDMa
-              /1gNMwlrLDHgBtJh8n7zBah0SKi1yY6/ciqa7if4ySOlkJ/VMaSppdGwUS+1NNqV
-              wq/wnBOUdUhh6SgLg3uJ/fQAvwmzclb3wEg9RIvM3hrL5KZEpvalg7hN0J6vvnq9
-              SVz4xcF+cycky9Sh5nMNWquUGgF3L97u25ToxlkOPHAfN1B7/hZm+ZOF5rdrOSTU
-              ZgEJAhD9EW/M+7+v0yVxRx/kCIAMLIfFzzw+DYBYJ4j8sSSDbQmo1O2K1Oj6T4is
-              eIKH8qGtx8Kg9vRsdD+GXHB940zXu1aKONRqpbKD4WazhUnJ0X1/UExHMgixUAtF
-              +9Fnx1F1sw==
-              =A8V4
-              -----END PGP MESSAGE-----
+            hQIMA4Wg+3KzyZPEAQ//SdvwVHkAdoLRiZmnToSmtmqA3cDJ4yJwtLFZF1NiYEPE
+            bvjoqvzc88pcuTj7UHAbT/thdT6IRjX4t6W4m5W0GbKrsvl6Hpeid3O/aWAmys4K
+            PX1qOmf+zvgwZb3/DGrbeyXTJnmZp85OgUFreeUGMKocLQ05XISrAkF7/LiiXN8I
+            58+gmTBPZrdWygo8gmkU67BifV5bm3yQk9xmS//m6bpEdEpah9gMFXXcvIILZT08
+            tpJ/OS4O3SLKZ7kcItvyLBpHwgD0Vun3u84l6HGtl+Eg2qNOf919/rflZPdbaOke
+            3E3uIEX9xTbz0r5hqPPK+/C5N/xrhXa/1pfEfWSmqIpRyMRpvCyEhDMM8xbz/hfh
+            c7FAQA/wZPj+M7E4V8pE/Ma5O1nIHDBE4EE2NZBEFcRZZ29VMhcI+QqFBYqF92eQ
+            Wghgfy5YfbICSTz9emMRRMxurdrnEsDeH2gaJmBw7mGLtfqdkWyqZwRPoeirMIU7
+            OgKUG2nlCVBWQZKeyXidZYSVuDsW7h8wB9JoOj6Sce4mvpQqs7F+P6f/0+s1yopc
+            PyNhQ5XIOTeePF5OhOnxTEHI7WaXNL/pajiSb6TTATKY65S9mYRBLN1YQYiBIQId
+            yiEQRpciIMerWNjUaH1mM1R3ItbGetfYz3y1qgBrxV1oSWpSz4YayyQ0yDm2AhDU
+            aAEJAhCxeeemAouOiUe3YRySLX4V9kD3Z38IzpLU6Wp2Rv0GW7nB7eNyYqCkxF0i
+            IW7/ovGhR3I2chyuJSJehOlaKVInxHUtsDuNfa6V4SVi6FpldQbEz9GlbDR/IpVz
+            /T+PH+tir+Ca
+            =ah2j
+            -----END PGP MESSAGE-----
           fp: 2F678007F08254265530095FB5B68F8BCE0CB069
     encrypted_regex: ^(data|stringData|flag|password|secret)$
+    mac_only_encrypted: true
     version: 3.11.0
