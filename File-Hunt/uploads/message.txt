@@ -1,0 +1,16 @@
+========================================
+  SERVEUR INTERNE - LOG D'ACCÈS
+========================================
+
+[2026-02-10 08:12:01] Connexion utilisateur: admin
+[2026-02-10 08:12:05] Accès fichier: /etc/passwd
+[2026-02-10 08:12:07] Accès fichier: /var/log/auth.log
+[2026-02-10 08:13:22] Commande exécutée: cat /opt/secret/note.txt
+[2026-02-10 08:13:22] Contenu: "Le mot de passe du coffre est: hunter2"
+[2026-02-10 08:14:01] Commande exécutée: echo "U0tMe3VwbDA0ZHNfZjM0dHVyM193MHJrc30=" | base64 -d
+[2026-02-10 08:14:01] Résultat: [REDACTED]
+[2026-02-10 08:15:00] Déconnexion utilisateur: admin
+
+========================================
+  FIN DU LOG
+========================================
