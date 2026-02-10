@@ -9,6 +9,7 @@ on:
       - "**/*.zip.gpg"
       - "**/src/**"
       - "**/Challenge.yaml"
+      - "**/*.py"
 
 permissions:
   contents: read

@@ -34,7 +34,7 @@ console = Console()
 
 # Configuration
 GPG_KEY_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "skyline_key.pub")
-FINGERPRINT = "96F466C4EF5AE501FC0C31649FBB4E548493AC41"
+FINGERPRINT = "2F678007F08254265530095FB5B68F8BCE0CB069"
 
 def check_dependencies():
     """Checks if 'sops' and 'gpg' are installed."""
@@ -52,19 +52,36 @@ def check_dependencies():
         sys.exit(1)
 
 def import_gpg_key():
-    """Imports the public key if not already present."""
-    gpg = gnupg.GPG()
+    """Imports the public key into the SYSTEM gpg keyring (same one sops uses)."""
     if not os.path.exists(GPG_KEY_PATH):
         rprint(f"[bold red]Erreur : Clé publique introuvable ici : {GPG_KEY_PATH}[/bold red]")
         sys.exit(1)
-        
-    with open(GPG_KEY_PATH, "r") as f:
-        key_data = f.read()
-        import_result = gpg.import_keys(key_data)
-        
-    # We don't exit if import fails because it might already be there, 
-    # but strictly we should check. For now, assume user setup is okay or relying on system GPG.
-    # print(f"GPG Import Status: {import_result.results}")
+
+    # Check if key is already in system keyring
+    try:
+        result = subprocess.run(
+            ["gpg", "--list-keys", FINGERPRINT],
+            capture_output=True, text=True
+        )
+        if result.returncode == 0:
+            return  # Key already imported
+    except Exception:
+        pass
+
+    # Import into system gpg keyring (the one sops uses)
+    try:
+        result = subprocess.run(
+            ["gpg", "--import", GPG_KEY_PATH],
+            capture_output=True, text=True
+        )
+        if result.returncode == 0:
+            rprint(f"[green]✔ Clé publique importée dans le trousseau GPG système.[/green]")
+        else:
+            rprint(f"[red]Erreur lors de l'import de la clé : {result.stderr}[/red]")
+            sys.exit(1)
+    except Exception as e:
+        rprint(f"[red]Erreur lors de l'import GPG : {e}[/red]")
+        sys.exit(1)
 
 def encrypt_config(file_path):
     """Encrypts a YAML/JSON configuration file using SOPS."""

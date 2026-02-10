@@ -11,52 +11,103 @@ Bienvenue dans le dépôt des challenges SkylineCTF ! Ce guide vous expliquera c
 Suivez ces 4 étapes simples pour voir votre challenge en ligne.
 
 ### 1. Préparation 🛠️
-Clonez ce dépôt sur votre machine et installez les dépendances nécessaires pour sécuriser vos fichiers.
-
+Clonez ce dépôt.
 ```bash
 git clone https://github.com/Sp00kySkelet0n/SkylineCTF-Challenges.git
 cd SkylineCTF-Challenges
-pip install python-gnupg # Requis pour le script de sécurité
-# Assurez-vous aussi d'avoir 'sops' et 'gpg' installés sur votre système !
 ```
 
 ### 2. Création du Challenge 📝
 Créez un dossier pour votre challenge (par exemple `Web/Mon-Challenge`).
-Il doit contenir au minimum :
-*   `Challenge.yaml` : La définition du challenge (points, description, image...).
-*   `Dockerfile` : Pour construire l'environnement du challenge.
-*   `src/` (Optionnel) : Votre code source.
+Il doit contenir :
+*   `Challenge.yaml` : La définition du challenge.
+*   `Dockerfile` (si dockerisé).
+*   `uploads/` (optionnel) : Fichiers associés au challenge à fournir aux joueurs.
+*   `src/` (optionnel) : Code source (chiffré par le wizard).
 
-**Exemple de `Challenge.yaml` :**
+---
+
+## 📂 Structure du Challenge.yaml
+
+### Type 1 : Challenge Docker (Web, Pwn...) 🐳
+Utilise une image Docker et un port. Les points s'ajustent dynamiquement.
+
+```yaml
+
+apiVersion: skyline.local/v1 # Ne jamais modifier
+kind: CTFChallenge # Ne jamais modifier
+metadata:
+  name: mon-challenge-unique # Doit être lowercase et sans espaces ni caracteres speciaux
+  namespace: ctfd # Ne jamais modifier
+spec:
+  # Infos Générales
+  name: "Titre du Challenge"
+  description: "Trouvez le flag !"
+  category: "Web"       # Web, Pwn, Crypto, Reverse...
+  
+  # Points Dynamiques (Recommandé)
+  type: "dynamic"
+  initial: 500          # Points de départ
+  decay: 10             # Nombre de solutions pour baisse max
+  minimum: 50           # Points minimum
+
+  # Déploiement
+  image: "ghcr.io/sp00kyskelet0n/chall:latest"
+  port: 1337            # Port interne du conteneur
+  instance: true        # Détermine si le challenge peut être déployé à la demande
+  
+  # Fichiers (si besoin de fournir un binaire/source)
+  upload_files: true    # Upload tout le dossier 'uploads/' vers CTFd
+
+  flag: "SKL{...}"    # À chiffrer avec wizard.sh !
+```
+
+### Type 2 : Challenge Statique (Forensic, Reverse) 📁
+Pas de Docker, juste des fichiers à télécharger.
+
 ```yaml
 apiVersion: skyline.local/v1
 kind: CTFChallenge
 metadata:
-  name: mon-super-challenge
+  name: mon-challenge-forensic
   namespace: ctfd
 spec:
-  name: "Le Hack du Siècle"
-  description: "Pouvez-vous trouver le flag ?"
-  category: "Web"
+  name: "Analyse Mystère"
+  description: "Analysez ce fichier PCAP..."
+  category: "Forensic"
+  type: "standard"      # Ou dynamic
   points: 100
-  image: "ghcr.io/sp00kyskelet0n/skylinectf-challenges/mon-super-challenge:latest"
-  port: 80
-  # flag: "SKL{mon_secret}" <-- ATTENTION : Voir étape 3 pour sécuriser ceci !
+  
+  upload_files: true    # Indispensable pour Forensic/Reverse !
+  # Placez vos fichiers (PCAP, binaire...) (dans la limite de 50mb) dans le dossier 'uploads/' du challenge.
+  
+  flag: "SKL{...}"      # À chiffrer avec wizard.sh !
 ```
+
+**Note sur la Connexion :** 
+L'opérateur détecte automatiquement le protocole (`http://` ou `tcp://`) selon la catégorie et le port. Vous pouvez forcer via `connection_info: "..."`.
+
+---
 
 ### 3. Sécurisation (Chiffrement) 🔐
-**C'est l'étape la plus importante !** Protégez vos flags et votre code source en une seule commande grâce à notre assistant.
+**C'est l'étape la plus importante !** Protégez vos flags et votre code source avec notre assistant.
 
+**Sur Linux / Mac :**
 ```bash
-python3 manage_secrets.py secure Web/Mon-Challenge
+./wizard.sh
 ```
 
-L'assistant (`wizard`) va scanner votre dossier et :
-1.  **Automatiquement** chiffrer le `Challenge.yaml` (Indispensable).
-2.  **Automatiquement** chiffrer `WALKTHROUGH.md` s'il existe (Indispensable).
-3.  Vous demander s'il faut chiffrer et zipper le dossier `src`.
+**Sur Windows :**
+```cmd
+wizard.bat
+```
 
-**C'est tout !** Vos fichiers sont maintenant prêts.
+L'assistant va :
+1.  Chiffrer le `Challenge.yaml` (les secrets).
+2.  Chiffrer le `WALKTHROUGH.md` (writeup).
+3.  Proposer de chiffrer le dossier `src/` (code source).
+
+**C'est tout !** Vos fichiers `.encrypted` sont prêts.
 
 ### 4. Publication ✈️
 Une fois vos fichiers sécurisés :
