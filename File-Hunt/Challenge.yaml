@@ -7,7 +7,7 @@ spec:
   name: File Hunt
   description: |
     Un fichier suspect a été retrouvé sur un serveur compromis.
-    Analysez-le pour retrouver le flag caché.
+    Analysez-le pour retrouver le flag caché !
   category: Forensic
   type: standard
   points: 50
