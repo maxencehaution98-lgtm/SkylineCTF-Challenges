@@ -13,35 +13,4 @@ spec:
   image: ghcr.io/sp00kyskelet0n/skylinectf-challenges/cellule-4755:latest
   port: 22
   instance: true
-  flag: ENC[AES256_GCM,data:oVQ8+LsQwNqUkbXRKB3wX01BaWMFvImwQg==,iv:XWJz95A+pgxLbzMSQcfZU83RV46YCZPg3exofwjv0Hw=,tag:mlSV6LyV3xn5/kRihNL8Cg==,type:str]
-sops:
-  kms: []
-  gcp_kms: []
-  azure_kv: []
-  hc_vault: []
-  age: []
-  lastmodified: "2026-02-11T19:09:13Z"
-  mac: ENC[AES256_GCM,data:8mZ40vCU3SVT2fHJrV4DwcyA48KZN+DeOlagNR3tT8CD9DL6294dCz3jXy0TIiR+CmDF1vsyMfyGjrmh78nyn99MmftYmrYJQhfkYjUZkUAVmfkw3v7++e1MmJBmAx3HRoQkj9mBBNxzd6EPd/ACsnJbKvGqMfhRvISzUR+dVd4=,iv:OZuexPT6FJ+7Fc1GyUFySKBqyvM6JY+gHWnDyrRLze4=,tag:8LDW+WOUy8hVLZcsbcpFUQ==,type:str]
-  pgp:
-    - created_at: "2026-02-11T19:09:13Z"
-      enc: |-
-        -----BEGIN PGP MESSAGE-----
-
-        hQIMA4Wg+3KzyZPEARAAjfHaMY+by1ezg4uFzfajXPfh+L8H2omQ7A6PvLDAyRFw
-        pa/oxiPTq/13jPXuUmEyg05JBl0p3+DOweWUmodSSbtIRFCVmJrJDlGOgiVeo28w
-        r/JLrc8RrtvIDd1s6z42sLL3PA5tdApZ0FgsZphiotBq8l8OsOyVtJJYdEsh6pa2
-        Zf6QJy38lSUCAzVmosCRKFLd/l/T7ALc3QWQC6Oi0RB1GOQL4kmSIfd4z9VZWwnN
-        HLRuy6iaC5CRDHUYb3n93eKvfNaKiZ0GoSoQpyVSBAxJbSJ837CG//k25pOFDVxn
-        hKnk0eP/AeXy3GOBITKHEWLl5fAPLdYN4Iw+bb5iMKIHFohmDAL94ZcFcr+w7hYj
-        mLysu5JzxlCorpQUt+AyOo/EUQM1J3NBn5F5AvHc7cYBhyVekbJLKBhbRw8sU76d
-        tI4CtakaJhqUefuORXTf+9ErcAU1cSjS73zrLta6UBe+KntbK5vo+rEvv459zHac
-        WsXtQpY2n8wKznSipG6ydpdfUE7AqabXhNVu09EhTKoQoevFBDxuRscwVw7LHl1x
-        F6+Nqg3VnwLTWRIhnysommJbxXji07dxLltlN2giFQZE0kPKZeus/ZKkHj6/YPkd
-        M0MjOEm+PYkvUDMGDH3Aq2gZDlK9vajurkuTq8PKTLiER3VBL2ShHT0OfwFrbNDS
-        XgGJ7km7WoDQK8lMdlhabTmooNgHerosKdoFgsMwqtSsd+cOQKkmM/QUxM5XNihV
-        Lw8CSpaWwdc6Oy8O1+KLi6HkS/5D15141FBeAx9LpC3tRg3pZALejpK6yIEg0qM=
-        =aZNk
-        -----END PGP MESSAGE-----
-      fp: 2F678007F08254265530095FB5B68F8BCE0CB069
-  encrypted_regex: ^(data|stringData|flag|password|secret)$
-  version: 3.8.1
+  flag: SKL{SsH-&-B1naRY-PR1v3Sc}
