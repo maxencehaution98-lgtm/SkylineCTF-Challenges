@@ -1,48 +1,48 @@
 apiVersion: skyline.local/v1
 kind: CTFChallenge
 metadata:
-    name: cell-block
-    namespace: ctfd
+  name: cell-block
+  namespace: ctfd
 spec:
-    name: Ce(-l)l Block
-    description: |
-        Vous êtes enfermé dans un environnement restreint (rbash).
-        Votre objectif est de vous évader de cette prison (jail escape) pour lire le flag.
-        Identifiants SSH fournis au lancement de l'instance.
-    category: System
-    points: 100
-    instance: true
-    image: ghcr.io/sp00kyskelet0n/skylinectf-challenges/ce-l-l-block:latest
-    port: 22
-    flag: ENC[AES256_GCM,data:OYBYnQKhxwkb9fQVNfHtief+kJFDQBmRaRWHtVI9ULAWPgtxwbBy/A==,iv:1N1drT2RUG5tR1OruyOfCi9M4ukI9PZu37QbVyDn22o=,tag:C7Zpfx0VLfOfJZcGhGn5Gw==,type:str]
+  name: Ce(-l)l Block
+  description: |
+    Vous êtes enfermé dans un environnement restreint (rbash).
+    Votre objectif est de vous évader de cette prison (jail escape) pour lire le flag.
+  category: System
+  points: 100
+  instance: true
+  image: ghcr.io/sp00kyskelet0n/skylinectf-challenges/ce-l-l-block:latest
+  connection_info: Lancer votre instance sur http://10.255.0.53 puis ssh user@<IP> -p <PORT>
+  port: 22
+  flag: ENC[AES256_GCM,data:OYBYnQKhxwkb9fQVNfHtief+kJFDQBmRaRWHtVI9ULAWPgtxwbBy/A==,iv:1N1drT2RUG5tR1OruyOfCi9M4ukI9PZu37QbVyDn22o=,tag:C7Zpfx0VLfOfJZcGhGn5Gw==,type:str]
 sops:
-    kms: []
-    gcp_kms: []
-    azure_kv: []
-    hc_vault: []
-    age: []
-    lastmodified: "2026-02-11T17:02:51Z"
-    mac: ENC[AES256_GCM,data:+MT7S2NLnodCW+kXU1kcUBM4xGjphqmy7Di/Iy3P8lWE9oIlSVoxS21dgsqB7ucIBg+xMeLNoFlJLVqfLKM9rj8rddCuCOonf+LH9UxPwLPYMd1qqQYWLNav6vFBLbvOx6Ft1HTgv2tflx03x29IYmdW5XIvEj31voADtDLQt1E=,iv:hFBD6+HztEmTPyUYbIyVgqsa6b43CD50dZrb2YAlzrg=,tag:vHsyFSbvLagnOBn7BVsE0A==,type:str]
-    pgp:
-        - created_at: "2026-02-11T17:02:51Z"
-          enc: |-
-            -----BEGIN PGP MESSAGE-----
+  kms: []
+  gcp_kms: []
+  azure_kv: []
+  hc_vault: []
+  age: []
+  lastmodified: "2026-02-11T17:02:51Z"
+  mac: ENC[AES256_GCM,data:+MT7S2NLnodCW+kXU1kcUBM4xGjphqmy7Di/Iy3P8lWE9oIlSVoxS21dgsqB7ucIBg+xMeLNoFlJLVqfLKM9rj8rddCuCOonf+LH9UxPwLPYMd1qqQYWLNav6vFBLbvOx6Ft1HTgv2tflx03x29IYmdW5XIvEj31voADtDLQt1E=,iv:hFBD6+HztEmTPyUYbIyVgqsa6b43CD50dZrb2YAlzrg=,tag:vHsyFSbvLagnOBn7BVsE0A==,type:str]
+  pgp:
+    - created_at: "2026-02-11T17:02:51Z"
+      enc: |-
+        -----BEGIN PGP MESSAGE-----
 
-            hQIMA4Wg+3KzyZPEARAAgxS/t9WtXPGZalHEeXgPfZk9/FD5T4VQ7txSP273It+p
-            fsYt20SYFKfhYEyZFSkAh4jAzTLFkwQh7bY5NfdiSEh3sL2W+zKNEKDxu95aHDgy
-            4IF/G302BGG0LAKFmox6+4Pohz/6QpW7cXWtTL/5rl5Wj80rWK0x/bNB9nqZkUuk
-            uKZk/ZUVvo+89F1HSN3sjlsmQQJSP9PvbSoQ2CPpXl1PPVMjjXD69tjNtZiuaEOf
-            wkmjJ+S4MuOtd6JzxgWR8IOGuAHd4nhhrTHV0if1kDz4NLoqEN8rlpEcUjaT9C0G
-            bvucPxft3K3VD0Si8SF/Vp95K38LnOMsm9lePiK8cSFqnOMmujQKP6x4ega44HMW
-            5IyMY5hwEXT2pmcPsM0EDav8mUd/oKFUSue6KtLASXyDAcpJ0rY3m/6S5AXwkJwh
-            OY7k/XixdExE8B4Ym9Khz42Og5KjST1UTwhIpa4fIJonE5zluCAnLfsm0EpFpJJh
-            8lcIsd8gwPUyNgapSaIP+ST7nqQrqrZbv9JNb2DBNeBj+Ai7uqI7B+6D4Xc7ttv6
-            sr0aH4GdQHMfuMinByUyL+x/tbNWyqaA3uQQutzvZrZYZlskFe/AGlezA6jIdgDH
-            sckeHDXgFXQJ1WBh8+BLCPfZXG9YE6KZbkChuS7BHFKTK9b/FaSxbdFeF8Z1q/PS
-            XgGPdpK4EBaOQZMjRX4PPRKcYfLpJTTnf+nX6SMOAXZP24tYaTz4sv3JolNLNQXD
-            JFiN+bmoNmv4x761j19K9cz1UIbMpGBrx31mmFQ+2hBsVPTUX5WHfE27LSyI/HA=
-            =378j
-            -----END PGP MESSAGE-----
-          fp: 2F678007F08254265530095FB5B68F8BCE0CB069
-    encrypted_regex: ^(data|stringData|flag|password|secret)$
-    version: 3.8.1
+        hQIMA4Wg+3KzyZPEARAAgxS/t9WtXPGZalHEeXgPfZk9/FD5T4VQ7txSP273It+p
+        fsYt20SYFKfhYEyZFSkAh4jAzTLFkwQh7bY5NfdiSEh3sL2W+zKNEKDxu95aHDgy
+        4IF/G302BGG0LAKFmox6+4Pohz/6QpW7cXWtTL/5rl5Wj80rWK0x/bNB9nqZkUuk
+        uKZk/ZUVvo+89F1HSN3sjlsmQQJSP9PvbSoQ2CPpXl1PPVMjjXD69tjNtZiuaEOf
+        wkmjJ+S4MuOtd6JzxgWR8IOGuAHd4nhhrTHV0if1kDz4NLoqEN8rlpEcUjaT9C0G
+        bvucPxft3K3VD0Si8SF/Vp95K38LnOMsm9lePiK8cSFqnOMmujQKP6x4ega44HMW
+        5IyMY5hwEXT2pmcPsM0EDav8mUd/oKFUSue6KtLASXyDAcpJ0rY3m/6S5AXwkJwh
+        OY7k/XixdExE8B4Ym9Khz42Og5KjST1UTwhIpa4fIJonE5zluCAnLfsm0EpFpJJh
+        8lcIsd8gwPUyNgapSaIP+ST7nqQrqrZbv9JNb2DBNeBj+Ai7uqI7B+6D4Xc7ttv6
+        sr0aH4GdQHMfuMinByUyL+x/tbNWyqaA3uQQutzvZrZYZlskFe/AGlezA6jIdgDH
+        sckeHDXgFXQJ1WBh8+BLCPfZXG9YE6KZbkChuS7BHFKTK9b/FaSxbdFeF8Z1q/PS
+        XgGPdpK4EBaOQZMjRX4PPRKcYfLpJTTnf+nX6SMOAXZP24tYaTz4sv3JolNLNQXD
+        JFiN+bmoNmv4x761j19K9cz1UIbMpGBrx31mmFQ+2hBsVPTUX5WHfE27LSyI/HA=
+        =378j
+        -----END PGP MESSAGE-----
+      fp: 2F678007F08254265530095FB5B68F8BCE0CB069
+  encrypted_regex: ^(data|stringData|flag|password|secret)$
+  version: 3.8.1
