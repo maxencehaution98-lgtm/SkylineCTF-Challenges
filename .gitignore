@@ -4,3 +4,4 @@ __pycache__
 *.zip
 !*.zip.gpg
 remove2.sh
+solve.py
