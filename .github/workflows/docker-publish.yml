@@ -63,6 +63,8 @@ jobs:
           dir_names: true
           json: false
           separator: " "
+          safe_output: false
+          quotepath: false
 
       - name: Build and Push Images
         env:
