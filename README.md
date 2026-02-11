@@ -37,7 +37,7 @@ Utilise une image Docker et un port. Les points s'ajustent dynamiquement.
 apiVersion: skyline.local/v1 # Ne jamais modifier
 kind: CTFChallenge # Ne jamais modifier
 metadata:
-  name: mon-challenge-unique # Doit être lowercase et sans espaces ni caracteres speciaux
+  name: mon-challenge-unique # Doit correspondre au nom du dossier (lowercase, sans espaces)
   namespace: ctfd # Ne jamais modifier
 spec:
   # Infos Générales
@@ -69,7 +69,7 @@ Pas de Docker, juste des fichiers à télécharger.
 apiVersion: skyline.local/v1
 kind: CTFChallenge
 metadata:
-  name: mon-challenge-forensic
+  name: mon-challenge-forensic # Doit correspondre au nom du dossier (lowercase, sans espaces)
   namespace: ctfd
 spec:
   name: "Analyse Mystère"
