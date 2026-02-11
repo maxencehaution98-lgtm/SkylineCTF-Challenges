@@ -1,16 +1,47 @@
 apiVersion: skyline.local/v1
 kind: CTFChallenge
 metadata:
-  name: cellule-4755
-  namespace: ctfd
+    name: cellule-4755
+    namespace: ctfd
 spec:
-  name: Cellule 4755
-  description: |
-    Un binaire système possède des permissions étranges (SUID).
-    Analysez le système pour trouver ce binaire et l'exploiter afin d'obtenir les privilèges nécessaires pour lire le flag.
-  category: System
-  points: 100
-  image: ghcr.io/sp00kyskelet0n/skylinectf-challenges/cellule-4755:latest
-  port: 22
-  instance: true
-  flag: SKL{SsH-&-B1naRY-PR1v3Sc}
+    name: Cellule 4755
+    description: |
+        Un binaire système possède des permissions étranges (SUID).
+        Analysez le système pour trouver ce binaire et l'exploiter afin d'obtenir les privilèges nécessaires pour lire le flag.
+    category: System
+    points: 100
+    image: ghcr.io/sp00kyskelet0n/skylinectf-challenges/cellule-4755:latest
+    port: 22
+    instance: true
+    flag: ENC[AES256_GCM,data:Jrr8RTuWLxrTZya/gSuCMRoAcaKR5oGIvg==,iv:xiL67G3o3/mmBLoKHtuf8QIziwV0P7U+T8rV1DB9AKM=,tag:wK9EvTotidTaOtk1o0OzVA==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2026-02-11T20:21:08Z"
+    mac: ENC[AES256_GCM,data:VZwKybtAy6mg4dxX1MqniQ4r6KWTCGt1+9JpG5GBlBEV/gjbMicXSiMVd0bFBOpVpU6QxvduyMSGfNh3m9uOHe0xoQiY3BizZMp/3J10QL0p7VLXMpVDmXIfPb99FYD5xGtAp5WPHDTyZN+6NeABxWdou6l30CUYrC0BKUALMms=,iv:02G7mEvHnwYCBWB+uhKy3tqGtW4gK9koaOGZBWByIsA=,tag:n4oycMpSXx8n29mYjGeYUw==,type:str]
+    pgp:
+        - created_at: "2026-02-11T20:21:08Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            hQIMA4Wg+3KzyZPEARAAgvUK6pJHOBFfb3MGl2IRKnvQARzdW0y+bDvfI9QmsChr
+            DQWLJttpOBtlyaihWCGgfkfSpTDVK4MlFN/wLPQzkpf+7xxy0ZrWYe+0tEiycasT
+            9JyxrUkNUX3p7SF/vtAc/sfbNEj7EFXrXvCzHLFZvX17ZIdcGIfMiuvy5zOGBlEZ
+            whjBmxOWBdSR0Mcy5VUZwXMDGsjqf/PcubhPE+8TSd4Qvqjk/78PDu9qlB86ckqE
+            /xEYGe+hvmC9W2g9c2ogeaJtoPdRLReCo32yzKHEVGPST3BEnlkhivpqaa4qgbGP
+            KIizxFpl0TpNJlO1SQEyxBo3Nu8GDefCUsLLP7GJ3twrXQrbj8mWcWaSlb14ynJA
+            mOO5Y1CtkpDGa7+4BurUFzs2FdoE3DgRVVd/ZGcw8KVgPOjOATH5ZYf6mPg4RfPu
+            8LzPiOCgYpcbdKP3+GyQ32qwnPFIsMYc/K666kBu6g+9l+keacbiz8GK2JALs3ox
+            OWT1pSj47qSVzBup3ifrvb9lwH0UsQzLiM9cUSbaap68ShKkBoNnVVHKZX0+Ye8v
+            ehg/TutOAfXYRx2nG1xgT0rypOcGrIaC5Qv9OgRmphRXJIQ44f9mZSIbAlIlAG69
+            KxIwTYyVKYS7V3Neli4pdoHLJNAQPXXIgEbb8Nn1hKRyucjO3Rv2wRC+OqPEmD/S
+            XgH0P1Anl4bv+rRWdNSu2H+VXc1ZStmdfPGIS8RV84HQvB77Q7UmvS5Qw66ZGPoc
+            d+8fHkQbMOPG2bp7DxxJBLRwAuuq7uCviPXBlCBnkIPaImk4SWPv+m/qIOfTJ1E=
+            =W3IH
+            -----END PGP MESSAGE-----
+          fp: 2F678007F08254265530095FB5B68F8BCE0CB069
+    encrypted_regex: ^(data|stringData|flag|password|secret)$
+    version: 3.8.1
