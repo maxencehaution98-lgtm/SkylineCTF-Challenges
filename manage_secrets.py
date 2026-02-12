@@ -456,31 +456,43 @@ def submit_pr(folder_name):
         base_sha = base_branch.commit.sha
 
         rprint("   [dim]Préparation des fichiers...[/dim]")
+        # Files/dirs to skip
+        SKIP_DIRS = {'__pycache__', '.git', 'node_modules'}
+        SKIP_FILES = {'solve.py', '.DS_Store'}
+
         # Walk challenge folder and create tree elements
         tree_elements = []
         for root, dirs, files in os.walk(challenge_path):
+            # Skip unwanted directories
+            dirs[:] = [d for d in dirs if d not in SKIP_DIRS]
+
             for filename in files:
+                if filename in SKIP_FILES or filename.endswith('.pyc'):
+                    continue
+
                 filepath = os.path.join(root, filename)
-                # Relative path from repo root (e.g. "Stack-Overflow/Challenge.yaml")
                 rel_path = os.path.relpath(filepath, "/app")
 
-                with open(filepath, 'rb') as f:
-                    content = f.read()
+                try:
+                    with open(filepath, 'rb') as f:
+                        content = f.read()
 
-                # Create blob via API
-                blob = fork.create_git_blob(base64.b64encode(content).decode(), "base64")
-                tree_elements.append(InputGitTreeElement(
-                    path=rel_path,
-                    mode="100644",
-                    type="blob",
-                    sha=blob.sha
-                ))
+                    blob = fork.create_git_blob(base64.b64encode(content).decode(), "base64")
+                    tree_elements.append(InputGitTreeElement(
+                        path=rel_path,
+                        mode="100644",
+                        type="blob",
+                        sha=blob.sha
+                    ))
+                    rprint(f"   [dim]   ✓ {rel_path}[/dim]")
+                except Exception as e:
+                    rprint(f"   [red]   ✗ {rel_path}: {e}[/red]")
 
         if not tree_elements:
             rprint("[yellow]Aucun fichier trouvé dans le dossier.[/yellow]")
             return
 
-        rprint(f"   [dim]{len(tree_elements)} fichier(s) à soumettre[/dim]")
+        rprint(f"   [green]   {len(tree_elements)} fichier(s) prêts[/green]")
 
         # Create tree from base
         base_tree = fork.get_git_tree(base_sha)
