@@ -12,8 +12,11 @@ echo "🧙‍♂️  Lancement du Wizard..."
 # -v $(pwd):/app : Mount current directory to /app
 # -it : Interactive mode
 # --rm : Remove container after exit
+# Ensure gh config dir exists (for auth persistence)
+mkdir -p "${HOME}/.config/gh"
+
 docker run -it --rm \
     -e PYTHONDONTWRITEBYTECODE=1 \
     -v "$(pwd):/app" \
-    -v "${HOME}/.gitconfig:/root/.gitconfig:ro" \
+    -v "${HOME}/.config/gh:/root/.config/gh" \
     skyline-wizard

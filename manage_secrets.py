@@ -36,7 +36,6 @@ console = Console()
 GPG_KEY_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "skyline_key.pub")
 FINGERPRINT = "2F678007F08254265530095FB5B68F8BCE0CB069"
 UPSTREAM_REPO = "Sp00kySkelet0n/SkylineCTF-Challenges"
-ENV_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env")
 
 def check_dependencies():
     """Checks if 'sops' and 'gpg' are installed."""
@@ -343,38 +342,63 @@ def run_wizard(target_folder):
 
 
 def load_github_token():
-    """Load GitHub token from .env file, or prompt the user."""
-    # Try loading from .env
-    if os.path.exists(ENV_FILE):
-        with open(ENV_FILE, 'r') as f:
-            for line in f:
-                line = line.strip()
-                if line.startswith('GITHUB_TOKEN=') and not line.startswith('#'):
-                    token = line.split('=', 1)[1].strip().strip('"').strip("'")
-                    if token:
-                        return token
+    """Load GitHub token via gh CLI. Uses device flow (browser) if not yet authenticated."""
+    import shutil as _shutil
 
-    # Prompt user
-    rprint("\n[yellow]Pour soumettre une PR, un token GitHub (PAT) est requis.[/yellow]")
-    rprint("[dim]Créez-en un sur : https://github.com/settings/tokens[/dim]")
-    rprint("[dim]Scopes nécessaires : repo[/dim]")
-    token = Prompt.ask("[bold]Token GitHub", password=True)
-
-    if not token:
+    if _shutil.which("gh") is None:
+        rprint("[red]Erreur : GitHub CLI (gh) non installé.[/red]")
+        rprint("[dim]Installez-le : https://cli.github.com/[/dim]")
         return None
 
-    # Save to .env for next time
-    with open(ENV_FILE, 'a') as f:
-        f.write(f"\nGITHUB_TOKEN={token}\n")
-    rprint("[green]✔ Token sauvegardé dans .env[/green]")
+    # Check if already authenticated
+    result = subprocess.run(
+        ["gh", "auth", "status"],
+        capture_output=True, text=True
+    )
 
-    return token
+    if result.returncode != 0:
+        # Not authenticated — start device flow
+        rprint("\n[yellow]Connexion à GitHub requise.[/yellow]")
+        rprint(Panel(
+            "[bold]1.[/bold] Ouvrez [bold cyan]https://github.com/login/device[/bold cyan] dans votre navigateur\n"
+            "[bold]2.[/bold] Copiez le code unique qui va s'afficher ci-dessous\n"
+            "[bold]3.[/bold] Collez-le sur la page GitHub et autorisez l'accès",
+            title="🔐 Authentification GitHub",
+            border_style="yellow"
+        ))
+
+        env = os.environ.copy()
+        env["GH_BROWSER"] = "echo"
+
+        login_result = subprocess.run(
+            ["gh", "auth", "login", "--web", "--git-protocol", "https"],
+            stdin=sys.stdin,
+            stdout=sys.stdout,
+            stderr=sys.stderr,
+            env=env
+        )
+
+        if login_result.returncode != 0:
+            rprint("[red]Erreur lors de la connexion GitHub.[/red]")
+            return None
+
+    # Extract token
+    token_result = subprocess.run(
+        ["gh", "auth", "token"],
+        capture_output=True, text=True
+    )
+
+    if token_result.returncode == 0 and token_result.stdout.strip():
+        return token_result.stdout.strip()
+
+    rprint("[red]Impossible de récupérer le token GitHub.[/red]")
+    return None
 
 
 def submit_pr(folder_name):
     """Fork the repo, create a branch, commit, push, and open a PR."""
     try:
-        from github import Github, GithubException
+        from github import Github, GithubException, Auth
         from git import Repo, GitCommandError
     except ImportError:
         rprint("[red]Erreur : PyGithub ou GitPython non installé.[/red]")
@@ -388,7 +412,7 @@ def submit_pr(folder_name):
         return
 
     try:
-        g = Github(token)
+        g = Github(auth=Auth.Token(token))
         user = g.get_user()
         username = user.login
         rprint(f"   [green]✔ Authentifié en tant que [bold]{username}[/bold][/green]")
