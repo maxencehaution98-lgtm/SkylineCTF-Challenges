@@ -439,6 +439,7 @@ def submit_pr(folder_name):
     branch_name = f"challenge/{folder_name}"
     try:
         repo = Repo("/app")
+        original_branch = repo.active_branch.name
 
         # Add fork remote (or update it)
         fork_url = f"https://{token}@github.com/{fork.full_name}.git"
@@ -448,12 +449,24 @@ def submit_pr(folder_name):
         except ValueError:
             fork_remote = repo.create_remote("fork", fork_url)
 
+        # Fetch fork's branches so we can base our branch on fork/main
+        rprint("   [dim]Synchronisation avec le fork...[/dim]")
+        repo.git.fetch('fork')
+
         rprint("   [dim]Création de branche...[/dim]")
-        # Create and checkout branch
+        # Stash any uncommitted changes (the encrypted files from the wizard)
+        has_changes = repo.is_dirty(untracked_files=True)
+        if has_changes:
+            repo.git.stash('push', '--include-untracked', '-m', 'wizard-pr-temp')
+
+        # Create branch from fork/main (not local main)
         if branch_name in [ref.name for ref in repo.branches]:
-            repo.git.checkout(branch_name)
-        else:
-            repo.git.checkout('-b', branch_name)
+            repo.git.branch('-D', branch_name)
+        repo.git.checkout('-b', branch_name, 'fork/main')
+
+        # Restore stashed changes (the challenge files)
+        if has_changes:
+            repo.git.stash('pop')
 
         rprint("   [dim]Commit & Push...[/dim]")
         # Stage challenge files
@@ -462,7 +475,7 @@ def submit_pr(folder_name):
         if os.path.exists("/app/.sops.yaml"):
             repo.git.add(".sops.yaml")
 
-        # Commit (skip if nothing to commit)
+        # Commit
         try:
             repo.git.commit('-m', f"Add challenge: {folder_name}")
         except GitCommandError:
@@ -474,36 +487,37 @@ def submit_pr(folder_name):
 
     except GitCommandError as e:
         rprint(f"[red]Erreur Git : {e}[/red]")
+        # Try to go back to original branch
+        try:
+            repo.git.checkout(original_branch)
+        except Exception:
+            pass
         return
 
-    # 4. Create PR (or find existing one)
+    # 4. Create PR
     try:
-        # Check if a PR already exists for this branch
-        existing_pulls = list(upstream.get_pulls(state='open', head=f"{username}:{branch_name}"))
-
-        if existing_pulls:
-            pr = existing_pulls[0]
-            rprint(f"   [green]✔ PR existante mise à jour avec les derniers changements.[/green]")
-            rprint(f"   [bold cyan]🔗 {pr.html_url}[/bold cyan]")
-        else:
-            pr = upstream.create_pull(
-                title=f"Nouveau Challenge : {folder_name}",
-                body=(
-                    f"## 🧙‍♂️ Soumis via le Wizard SkylineCTF\n\n"
-                    f"**Challenge :** `{folder_name}`\n\n"
-                    f"**Auteur :** @{username}\n"
-                ),
-                head=f"{username}:{branch_name}",
-                base="main"
-            )
-            rprint(f"   [green]✔ Pull Request créée ![/green]")
-            rprint(f"   [bold cyan]🔗 {pr.html_url}[/bold cyan]")
+        pr = upstream.create_pull(
+            title=f"Nouveau Challenge : {folder_name}",
+            body=(
+                f"## 🧙‍♂️ Soumis via le Wizard SkylineCTF\n\n"
+                f"**Challenge :** `{folder_name}`\n\n"
+                f"**Auteur :** @{username}\n"
+            ),
+            head=f"{username}:{branch_name}",
+            base="main"
+        )
+        rprint(f"   [green]✔ Pull Request créée ![/green]")
+        rprint(f"   [bold cyan]🔗 {pr.html_url}[/bold cyan]")
     except GithubException as e:
-        rprint(f"[red]Erreur lors de la création de la PR : {e}[/red]")
+        if e.status == 422 and "No commits between" in str(e):
+            rprint("   [yellow]⚠ Aucune différence avec la branche main — le challenge est déjà à jour.[/yellow]")
+            rprint("   [dim]Une PR ne peut être créée que s'il y a des changements par rapport à main.[/dim]")
+        else:
+            rprint(f"[red]Erreur lors de la création de la PR : {e}[/red]")
 
-    # Cleanup: switch back to main
+    # Cleanup: switch back to original branch
     try:
-        repo.git.checkout('main')
+        repo.git.checkout(original_branch)
     except GitCommandError:
         pass
 
