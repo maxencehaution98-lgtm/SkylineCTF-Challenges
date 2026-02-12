@@ -396,14 +396,15 @@ def load_github_token():
 
 
 def submit_pr(folder_name):
-    """Fork the repo, create a branch, commit, push, and open a PR."""
+    """Fork the repo, upload files via GitHub API, and open a PR."""
     try:
-        from github import Github, GithubException, Auth
-        from git import Repo, GitCommandError
+        from github import Github, GithubException, Auth, InputGitTreeElement
     except ImportError:
-        rprint("[red]Erreur : PyGithub ou GitPython non installé.[/red]")
-        rprint("[dim]pip install PyGithub GitPython[/dim]")
+        rprint("[red]Erreur : PyGithub non installé.[/red]")
+        rprint("[dim]pip install PyGithub[/dim]")
         return
+
+    import base64
 
     # 1. Auth
     token = load_github_token()
@@ -425,7 +426,6 @@ def submit_pr(folder_name):
         upstream = g.get_repo(UPSTREAM_REPO)
         rprint("   [dim]Fork du dépôt...[/dim]")
         fork = user.create_fork(upstream)
-        # Wait for fork to be ready
         time.sleep(3)
         rprint(f"   [green]✔ Fork : {fork.full_name}[/green]")
     except GithubException as e:
@@ -435,63 +435,76 @@ def submit_pr(folder_name):
             rprint(f"[red]Erreur lors du fork : {e}[/red]")
         return
 
-    # 3. Git operations
+    # 3. Upload files via GitHub API (no local git needed)
     branch_name = f"challenge/{folder_name}"
+    challenge_path = os.path.join("/app", folder_name)
+
     try:
-        repo = Repo("/app")
-        original_branch = repo.active_branch.name
-
-        # Add fork remote (or update it)
-        fork_url = f"https://{token}@github.com/{fork.full_name}.git"
+        # Sync fork with upstream before creating branch
+        rprint("   [dim]Synchronisation du fork...[/dim]")
         try:
-            fork_remote = repo.remote("fork")
-            fork_remote.set_url(fork_url)
-        except ValueError:
-            fork_remote = repo.create_remote("fork", fork_url)
+            upstream_main = upstream.get_branch("main")
+            try:
+                fork.get_git_ref(f"heads/main").edit(upstream_main.commit.sha)
+            except GithubException:
+                pass
+        except GithubException:
+            pass
 
-        # Fetch fork's branches so we can base our branch on fork/main
-        rprint("   [dim]Synchronisation avec le fork...[/dim]")
-        repo.git.fetch('fork')
+        # Get the base commit (fork's main branch)
+        base_branch = fork.get_branch("main")
+        base_sha = base_branch.commit.sha
 
-        rprint("   [dim]Création de branche...[/dim]")
-        # Stash any uncommitted changes (the encrypted files from the wizard)
-        has_changes = repo.is_dirty(untracked_files=True)
-        if has_changes:
-            repo.git.stash('push', '--include-untracked', '-m', 'wizard-pr-temp')
+        rprint("   [dim]Préparation des fichiers...[/dim]")
+        # Walk challenge folder and create tree elements
+        tree_elements = []
+        for root, dirs, files in os.walk(challenge_path):
+            for filename in files:
+                filepath = os.path.join(root, filename)
+                # Relative path from repo root (e.g. "Stack-Overflow/Challenge.yaml")
+                rel_path = os.path.relpath(filepath, "/app")
 
-        # Create branch from fork/main (not local main)
-        if branch_name in [ref.name for ref in repo.branches]:
-            repo.git.branch('-D', branch_name)
-        repo.git.checkout('-b', branch_name, 'fork/main')
+                with open(filepath, 'rb') as f:
+                    content = f.read()
 
-        # Restore stashed changes (the challenge files)
-        if has_changes:
-            repo.git.stash('pop')
+                # Create blob via API
+                blob = fork.create_git_blob(base64.b64encode(content).decode(), "base64")
+                tree_elements.append(InputGitTreeElement(
+                    path=rel_path,
+                    mode="100644",
+                    type="blob",
+                    sha=blob.sha
+                ))
 
+        if not tree_elements:
+            rprint("[yellow]Aucun fichier trouvé dans le dossier.[/yellow]")
+            return
+
+        rprint(f"   [dim]{len(tree_elements)} fichier(s) à soumettre[/dim]")
+
+        # Create tree from base
+        base_tree = fork.get_git_tree(base_sha)
+        new_tree = fork.create_git_tree(tree_elements, base_tree)
+
+        # Create commit
         rprint("   [dim]Commit & Push...[/dim]")
-        # Stage challenge files
-        repo.git.add(f"{folder_name}/")
-        # Also stage .sops.yaml in case it changed
-        if os.path.exists("/app/.sops.yaml"):
-            repo.git.add(".sops.yaml")
+        new_commit = fork.create_git_commit(
+            message=f"Add challenge: {folder_name}",
+            tree=new_tree,
+            parents=[fork.get_git_commit(base_sha)]
+        )
 
-        # Commit
+        # Create or update branch ref
         try:
-            repo.git.commit('-m', f"Add challenge: {folder_name}")
-        except GitCommandError:
-            rprint("   [yellow]Aucun changement à commiter.[/yellow]")
+            ref = fork.get_git_ref(f"heads/{branch_name}")
+            ref.edit(new_commit.sha, force=True)
+        except GithubException:
+            fork.create_git_ref(f"refs/heads/{branch_name}", new_commit.sha)
 
-        # Push
-        repo.git.push('fork', branch_name, force=True)
         rprint(f"   [green]✔ Poussé sur {fork.full_name}:{branch_name}[/green]")
 
-    except GitCommandError as e:
-        rprint(f"[red]Erreur Git : {e}[/red]")
-        # Try to go back to original branch
-        try:
-            repo.git.checkout(original_branch)
-        except Exception:
-            pass
+    except GithubException as e:
+        rprint(f"[red]Erreur lors de l'upload : {e}[/red]")
         return
 
     # 4. Create PR
@@ -509,17 +522,17 @@ def submit_pr(folder_name):
         rprint(f"   [green]✔ Pull Request créée ![/green]")
         rprint(f"   [bold cyan]🔗 {pr.html_url}[/bold cyan]")
     except GithubException as e:
-        if e.status == 422 and "No commits between" in str(e):
-            rprint("   [yellow]⚠ Aucune différence avec la branche main — le challenge est déjà à jour.[/yellow]")
-            rprint("   [dim]Une PR ne peut être créée que s'il y a des changements par rapport à main.[/dim]")
+        if e.status == 422 and "A pull request already exists" in str(e):
+            pulls = list(upstream.get_pulls(state='open', head=f"{username}:{branch_name}"))
+            if pulls:
+                rprint(f"   [green]✔ PR existante mise à jour.[/green]")
+                rprint(f"   [bold cyan]🔗 {pulls[0].html_url}[/bold cyan]")
+            else:
+                rprint("   [yellow]⚠ Une PR existe déjà pour cette branche.[/yellow]")
+        elif e.status == 422 and "No commits between" in str(e):
+            rprint("   [yellow]⚠ Aucune différence — le challenge est déjà à jour dans main.[/yellow]")
         else:
             rprint(f"[red]Erreur lors de la création de la PR : {e}[/red]")
-
-    # Cleanup: switch back to original branch
-    try:
-        repo.git.checkout(original_branch)
-    except GitCommandError:
-        pass
 
 
 if __name__ == "__main__":

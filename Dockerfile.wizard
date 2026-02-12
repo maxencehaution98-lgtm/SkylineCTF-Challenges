@@ -28,8 +28,7 @@ RUN pip install --no-cache-dir \
     rich \
     questionary \
     python-gnupg \
-    PyGithub \
-    GitPython
+    PyGithub
 
 WORKDIR /app
 
